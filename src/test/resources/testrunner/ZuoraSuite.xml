@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="ZuoraSuite" parallel="none">
+    <parameter name = "RootFolder" value="Zuora-SP"/>
+    <listeners>
+        <listener class-name="com.surepayroll.ExtentReports.ExtentReportsListener"></listener>
+    </listeners>
+    <test name="ZuoraTests">
+        <classes>
+            <class name="Zuora.ZuoraTests" />
+        </classes>
+    </test>
+
+</suite>

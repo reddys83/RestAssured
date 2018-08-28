@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="AllSuites" parallel="none">
+    <parameter name = "RootFolder" value="AllSuites"/>
+    <listeners>
+        <listener class-name="com.surepayroll.ExtentReports.ExtentReportsListener"></listener>
+    </listeners>
+
+    <suite-files>
+        <suite-file path="ZuoraSuite.xml" />
+        <suite-file path="DefaultPayrollSuite.xml" />
+        <suite-file path="VertexSuite.xml" />
+    </suite-files>
+
+</suite>

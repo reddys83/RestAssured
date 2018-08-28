@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="DefaultPayrollSuite" parallel="none">
+    <parameter name = "RootFolder" value="Aegis"/>
+    <listeners>
+        <listener class-name="com.surepayroll.ExtentReports.ExtentReportsListener"></listener>
+    </listeners>
+    <test name="DefaultPayrollTest">
+        <classes>
+            <class name="Aegis.DefaultPayrollTests" />
+        </classes>
+    </test>
+</suite>

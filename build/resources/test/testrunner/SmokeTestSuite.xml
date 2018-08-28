@@ -1,0 +1,21 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="smokeTestSuite" parallel="none">
+    <parameter name = "RootFolder" value="SmokeTest"/>
+    <listeners>
+        <listener class-name="com.surepayroll.ExtentReports.ExtentReportsListener"></listener>
+    </listeners>
+    <test name="smokeTest">
+        <groups>
+            <run>
+                <include name="smokeTest" />
+            </run>
+        </groups>
+        <packages>
+            <package name="Aegis.*"/>
+            <package name="Zuora.*"/>
+            <package name="SureCalc.*"/>
+        </packages>
+    </test>
+
+</suite>

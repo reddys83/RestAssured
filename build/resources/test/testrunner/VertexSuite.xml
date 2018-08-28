@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="VertexSuite" parallel="none">
+    <parameter name = "RootFolder" value="SureCalc"/>
+       <listeners>
+        <listener class-name="com.surepayroll.ExtentReports.ExtentReportsListener"></listener>
+    </listeners>
+    <test name="VertexTests">
+        <classes>
+            <class name="SureCalc.VertexTests" />
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,90 @@
+plugins {
+    id 'groovy'
+    id 'java'
+}
+
+group 'com'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+// mavenCentral()
+//    jcenter()
+
+    maven {
+        url "http://automation-qa:8081/repository/SP-Release/"
+        artifactUrls "http://automation-qa:8081/repository/SP-Custom/"
+    }
+}
+
+task SPtest(type:Test){
+
+
+    reports.html.enabled = false
+    if (project.hasProperty("env")) {
+        systemProperties['env']=project.getProperty("env")
+    }
+    useTestNG{
+        //dependsOn 'CleanTest'
+        scanForTestClasses=false
+        listeners << 'com.surepayroll.ExtentReports.ExtentReportsListener'
+
+        testLogging {
+            showStandardStreams=true
+            exceptionFormat "full"
+            events "started", "passed", "skipped", "failed", "standardOut", "standardError"
+        }
+
+
+
+        if (project.hasProperty("smokeTestSuite")){
+            options.suites("src/test/resources/testrunner/SmokeTestSuite.xml")
+        }
+
+
+        if (project.hasProperty("DefaultPayrollSuite")){
+            options.suites("src/test/resources/testrunner/DefaultPayrollSuite.xml")
+        }
+
+        if (project.hasProperty("ZuoraSuite")){
+            options.suites("src/test/resources/testrunner/ZuoraSuite.xml")
+        }
+
+        if (project.hasProperty("VertexSuite")){
+            options.suites("src/test/resources/testrunner/VertexSuite.xml")
+        }
+
+    }
+
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.4.15'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    /* compile group: 'info.cukes', name: 'cucumber-groovy', version: '1.2.5'
+     compile group: 'info.cukes', name: 'cucumber-core', version: '1.2.5'
+     compile group: 'info.cukes', name: 'cucumber-java8', version: '1.2.5'
+     compile group: 'info.cukes', name: 'cucumber-java', version: '1.2.5'
+     compile group: 'info.cukes', name: 'cucumber-testrunner', version: '1.2.5'
+     compile group: 'info.cukes', name: 'gherkin', version: '2.12.2'
+     compile group: 'com.rabbitmq', name: 'amqp-client', version: '5.1.2'
+     compile group: 'org.mongodb', name: 'mongodb-driver', version: '3.6.3'    */
+    compile group: 'io.rest-assured', name: 'rest-assured', version: '3.0.0'
+    compile group: 'io.rest-assured', name: 'json-path', version: '3.1.0'
+    compile group: 'io.rest-assured', name:'json-schema-validator', version: '3.1.0'
+    compile "com.aventstack:extentreports:3.1.5"
+    /* compile "com.vimalselvam:cucumber-extentsreport:3.0.1"  */
+    compile group: 'com.google.inject', name: 'guice', version: '4.2.0'
+    compile group: 'org.apache.commons', name:'commons-lang3', version: '3.0'
+    compile group: 'org.aeonbits.owner', name: 'owner', version: '1.0.10'
+    compile group: 'org.yaml', name: 'snakeyaml', version: '1.13'
+    compile group: 'org.testng', name: 'testng', version: '6.14.3'
+    compile group:   'javax.xml.bind', name: 'jaxb-api', version: '2.3.0'
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
+    testCompile group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '6.4.0.jre8'
+    compile group: 'org.apache.poi', name: 'poi', version: '3.17'
+    compile group: 'org.apache.poi', name: 'poi-ooxml', version: '3.17'
+    compile group: 'com.codoid.products', name: 'fillo', version: '1.18'
+    compile group: 'javax.mail', name: 'mail', version: '1.4.7'
+}
